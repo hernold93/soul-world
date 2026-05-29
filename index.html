@@ -6,198 +6,125 @@
 <title>העולם שבנפש · קוראי בטא</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Suez+One&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Suez+One&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#0d0d15;
-    --bg-soft:#15141f;
-    --card:#181725;
-    --ink:#ece5d6;
-    --ink-dim:#b7b0c2;
-    --muted:#8a8398;
-    --gold:#c9a24b;
-    --gold-soft:#e3c685;
-    --indigo:#2c2557;
+    --bg:#0d0d15; --bg-soft:#15141f; --card:#181725;
+    --ink:#ece5d6; --ink-dim:#b7b0c2; --muted:#8a8398;
+    --gold:#c9a24b; --gold-soft:#e3c685; --indigo:#2c2557;
     --line:rgba(201,162,75,.22);
-    --measure:38rem;
+    --fs:1;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    background:var(--bg);
-    color:var(--ink);
+    background:var(--bg); color:var(--ink);
     font-family:"Frank Ruhl Libre",Georgia,serif;
-    font-size:1.18rem;
-    line-height:1.95;
-    overflow-x:hidden;
-    position:relative;
-    min-height:100vh;
+    font-size:calc(1.18rem * var(--fs)); line-height:1.95;
+    overflow-x:hidden; position:relative; min-height:100vh;
   }
-  /* atmospheric depth */
-  body::before{
-    content:"";
-    position:fixed;inset:0;z-index:-2;
+  body::before{content:"";position:fixed;inset:0;z-index:-2;
     background:
       radial-gradient(900px 600px at 80% -10%, rgba(44,37,87,.55), transparent 60%),
       radial-gradient(700px 500px at 10% 110%, rgba(201,162,75,.10), transparent 55%),
       radial-gradient(1200px 900px at 50% 40%, rgba(20,19,32,.6), transparent 70%),
-      var(--bg);
-  }
-  /* fine grain */
-  body::after{
-    content:"";
-    position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
-  }
-  /* drifting hebrew letters */
+      var(--bg);}
+  body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");}
   .glyphs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-  .glyphs span{
-    position:absolute;
-    font-family:"Suez One",serif;
-    color:var(--gold);
-    opacity:.05;
-    font-size:8rem;
-    animation:drift 26s ease-in-out infinite;
-  }
-  @keyframes drift{
-    0%,100%{transform:translateY(0) rotate(0deg)}
-    50%{transform:translateY(-26px) rotate(6deg)}
-  }
+  .glyphs span{position:absolute;font-family:"Suez One",serif;color:var(--gold);opacity:.05;font-size:8rem;animation:drift 26s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(6deg)}}
+
+  /* reading controls */
+  .controls{position:fixed;top:1rem;left:1rem;z-index:50;display:flex;gap:.4rem;
+    background:rgba(21,20,31,.82);backdrop-filter:blur(8px);border:1px solid var(--line);
+    border-radius:30px;padding:.35rem .5rem;align-items:center}
+  .controls button{background:none;border:none;color:var(--gold-soft);cursor:pointer;
+    font-family:"Frank Ruhl Libre",serif;line-height:1;padding:.25rem .5rem;border-radius:20px;transition:background .15s}
+  .controls button:hover{background:rgba(201,162,75,.15)}
+  .controls .a-sm{font-size:.95rem}.controls .a-lg{font-size:1.35rem}
+  .controls .lbl{color:var(--muted);font-size:.72rem;letter-spacing:.08em;padding:0 .2rem}
 
   .wrap{max-width:46rem;margin:0 auto;padding:0 1.4rem}
 
-  /* HERO */
-  header.hero{
-    min-height:92vh;
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;
-    padding:5rem 1.4rem 4rem;
-  }
-  .eyebrow{
-    font-size:.82rem;letter-spacing:.42em;
-    color:var(--gold);text-transform:none;
-    margin-bottom:2.2rem;font-weight:500;
-  }
-  .booktitle{
-    font-family:"Suez One",serif;
-    font-size:clamp(2.6rem,9vw,5rem);
-    line-height:1.05;
-    color:var(--ink);
-    text-shadow:0 0 50px rgba(201,162,75,.18);
-    margin-bottom:.4rem;
-  }
-  .subtitle{
-    font-size:1.05rem;color:var(--ink-dim);font-style:italic;
-    letter-spacing:.05em;margin-bottom:3rem;
-  }
-  .welcome{
-    font-size:clamp(1.5rem,4.4vw,2.05rem);
-    font-weight:500;color:var(--ink);
-    line-height:1.6;max-width:30rem;margin:0 auto .9rem;
-  }
+  header.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 1.4rem 3rem}
+  .eyebrow{font-size:.82rem;letter-spacing:.42em;color:var(--gold);margin-bottom:2.2rem;font-weight:500}
+  .booktitle{font-family:"Suez One",serif;font-size:clamp(2.6rem,9vw,5rem);line-height:1.05;color:var(--ink);text-shadow:0 0 50px rgba(201,162,75,.18);margin-bottom:.4rem}
+  .subtitle{font-size:1.05rem;color:var(--ink-dim);font-style:italic;letter-spacing:.05em;margin-bottom:3rem}
+  .welcome{font-size:clamp(1.5rem,4.4vw,2.05rem);font-weight:500;color:var(--ink);line-height:1.6;max-width:30rem;margin:0 auto .9rem}
   .welcome .lead{color:var(--gold-soft);display:block;margin-bottom:.6rem;font-weight:700}
   .welcome .joy{display:block;margin-top:1rem;color:var(--gold);font-family:"Suez One",serif;font-size:1.3em}
-  .scrollcue{margin-top:3.4rem;color:var(--muted);font-size:.85rem;letter-spacing:.2em}
-  .scrollcue::after{content:"";display:block;width:1px;height:46px;margin:.9rem auto 0;
-    background:linear-gradient(var(--gold),transparent);animation:pulse 2.4s ease-in-out infinite}
+  .scrollcue{margin-top:3rem;color:var(--muted);font-size:.85rem;letter-spacing:.2em}
+  .scrollcue::after{content:"";display:block;width:1px;height:40px;margin:.9rem auto 0;background:linear-gradient(var(--gold),transparent);animation:pulse 2.4s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-  /* SECTION TITLES */
-  .section-head{
-    text-align:center;margin:4.5rem auto 2.6rem;
-  }
-  .section-head h2{
-    font-family:"Suez One",serif;font-size:2rem;color:var(--ink);font-weight:400;
-  }
-  .section-head .rule{
-    width:64px;height:2px;background:var(--gold);margin:1rem auto 0;opacity:.7;
-  }
+  /* TOC */
+  .toc{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:2rem 1.8rem;margin:3rem 0}
+  .toc h2{font-family:"Suez One",serif;font-size:1.4rem;color:var(--gold-soft);font-weight:400;margin-bottom:.4rem;text-align:center}
+  .toc .group-label{color:var(--gold);font-size:.85rem;letter-spacing:.2em;margin:1.4rem 0 .6rem;border-bottom:1px solid rgba(201,162,75,.18);padding-bottom:.4rem}
+  .toc a{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+    color:var(--ink);text-decoration:none;padding:.45rem .2rem;border-radius:8px;transition:background .15s,color .15s}
+  .toc a:hover{background:rgba(201,162,75,.08);color:var(--gold-soft)}
+  .toc a .t{display:flex;align-items:baseline;gap:.5rem}
+  .toc a .check{color:var(--gold);font-size:.9rem;width:1rem;display:inline-block}
+  .toc a .time{color:var(--muted);font-size:.8rem;white-space:nowrap;font-family:"Frank Ruhl Libre",serif}
 
-  /* PIECES */
-  .pieces{padding-bottom:2rem}
-  article.piece{
-    background:var(--card);
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:14px;
-    padding:2.4rem 2.1rem;
-    margin-bottom:1.8rem;
-    box-shadow:0 18px 50px rgba(0,0,0,.4);
-    position:relative;
-    overflow:hidden;
-  }
-  article.piece::before{
-    content:"";position:absolute;top:0;right:0;width:3px;height:100%;
-    background:linear-gradient(var(--gold),transparent);opacity:.6;
-  }
-  article.piece h3{
-    font-family:"Suez One",serif;font-weight:400;font-size:1.5rem;
-    color:var(--gold-soft);margin-bottom:1.1rem;
-  }
-  article.piece p{margin-bottom:1.05rem;color:var(--ink);}
-  article.piece p:last-child{margin-bottom:0}
+  .section-head{text-align:center;margin:4rem auto 2.4rem}
+  .section-head h2{font-family:"Suez One",serif;font-size:2rem;color:var(--ink);font-weight:400}
+  .section-head .sub{color:var(--muted);font-size:.9rem;margin-top:.4rem;letter-spacing:.05em}
+  .section-head .rule{width:64px;height:2px;background:var(--gold);margin:1rem auto 0;opacity:.7}
 
-  /* FEEDBACK */
-  .feedback{
-    background:var(--bg-soft);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:2.6rem 2.1rem;
-    margin:3rem 0 4rem;
-  }
-  .feedback .intro{color:var(--ink-dim);text-align:center;margin-bottom:2rem;font-size:1.05rem}
-  .field{margin-bottom:1.4rem}
+  article.piece{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:14px;
+    padding:2.4rem 2.1rem;margin-bottom:1.8rem;box-shadow:0 18px 50px rgba(0,0,0,.4);position:relative;overflow:hidden;scroll-margin-top:1.5rem}
+  article.piece::before{content:"";position:absolute;top:0;right:0;width:3px;height:100%;background:linear-gradient(var(--gold),transparent);opacity:.6}
+  article.piece.read{border-color:rgba(201,162,75,.35)}
+  article.piece .ptitle{font-family:"Suez One",serif;font-weight:400;font-size:1.55rem;color:var(--gold-soft);margin-bottom:.35rem}
+  article.piece .pmeta{color:var(--muted);font-size:.82rem;margin-bottom:1.4rem;letter-spacing:.04em}
+  article.piece p{margin-bottom:1.05rem;color:var(--ink)}
+  article.piece p:last-of-type{margin-bottom:0}
+
+  .pactions{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.07)}
+  .pactions button{font-family:"Frank Ruhl Libre",serif;font-size:.95rem;cursor:pointer;border-radius:9px;padding:.55rem 1rem;transition:all .15s;border:1px solid transparent}
+  .btn-fb{background:rgba(201,162,75,.12);color:var(--gold-soft);border-color:var(--line)}
+  .btn-fb:hover{background:rgba(201,162,75,.22)}
+  .btn-read{background:none;color:var(--muted);border-color:rgba(255,255,255,.12)}
+  .btn-read:hover{color:var(--ink);border-color:rgba(255,255,255,.25)}
+  .btn-read.is-read{color:var(--gold);border-color:var(--line)}
+
+  .feedback{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:2.6rem 2.1rem;margin:3rem 0}
+  .feedback .intro{color:var(--ink-dim);text-align:center;margin-bottom:1.4rem;font-size:1.05rem}
+  .prompts{list-style:none;display:flex;flex-direction:column;gap:.4rem;max-width:30rem;margin:0 auto 2rem;
+    color:var(--muted);font-size:.95rem}
+  .prompts li{padding-right:1.2rem;position:relative}
+  .prompts li::before{content:"·";position:absolute;right:0;color:var(--gold)}
+  .field{margin-bottom:1.3rem}
   .field label{display:block;font-size:.95rem;color:var(--gold);margin-bottom:.5rem;font-weight:500}
-  .field input,.field select,.field textarea{
-    width:100%;
-    background:#0f0e17;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:9px;
-    color:var(--ink);
-    font-family:inherit;font-size:1.05rem;
-    padding:.8rem 1rem;
-    line-height:1.7;
-    transition:border-color .2s,box-shadow .2s;
-  }
-  .field textarea{min-height:140px;resize:vertical}
-  .field input:focus,.field select:focus,.field textarea:focus{
-    outline:none;border-color:var(--gold);
-    box-shadow:0 0 0 3px rgba(201,162,75,.12);
-  }
+  .field input,.field select,.field textarea{width:100%;background:#0f0e17;border:1px solid rgba(255,255,255,.1);border-radius:9px;color:var(--ink);font-family:inherit;font-size:1.05rem;padding:.8rem 1rem;line-height:1.7;transition:border-color .2s,box-shadow .2s}
+  .field textarea{min-height:130px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.12)}
   .field select{appearance:none;cursor:pointer}
-  .send-btn{
-    width:100%;
-    background:linear-gradient(135deg,var(--gold),#a9842f);
-    color:#15120a;
-    font-family:"Suez One",serif;
-    font-size:1.2rem;
-    border:none;border-radius:10px;
-    padding:1rem;cursor:pointer;
-    transition:transform .15s,box-shadow .2s,filter .2s;
-    box-shadow:0 10px 30px rgba(201,162,75,.25);
-  }
-  .send-btn:hover{transform:translateY(-2px);filter:brightness(1.07);box-shadow:0 16px 40px rgba(201,162,75,.34)}
+  .send-btn{width:100%;background:linear-gradient(135deg,var(--gold),#a9842f);color:#15120a;font-family:"Suez One",serif;font-size:1.15rem;border:none;border-radius:10px;padding:1rem;cursor:pointer;transition:transform .15s,filter .2s,box-shadow .2s;box-shadow:0 10px 30px rgba(201,162,75,.25)}
+  .send-btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
   .send-btn:active{transform:translateY(0)}
   .note{font-size:.82rem;color:var(--muted);text-align:center;margin-top:1rem;line-height:1.6}
   .warn{color:#e08a8a;text-align:center;font-size:.95rem;margin-top:.9rem;min-height:1.2rem}
+  .ok-msg{color:var(--gold-soft);text-align:center;font-size:1rem;margin-top:.9rem;min-height:1.2rem}
+  .chan-tabs{display:flex;gap:.5rem;margin-bottom:1.6rem;justify-content:center}
+  .chan-tabs button{flex:1;max-width:14rem;background:none;border:1px solid var(--line);color:var(--ink-dim);font-family:inherit;font-size:1rem;padding:.7rem;border-radius:10px;cursor:pointer;transition:all .15s}
+  .chan-tabs button.active{background:rgba(201,162,75,.14);color:var(--gold-soft);border-color:var(--gold)}
+  .chan-tabs .anon-note{font-size:.7rem;display:block;color:var(--muted);margin-top:.2rem}
+  .panel{display:none}.panel.active{display:block}
 
-  footer{
-    text-align:center;padding:2.5rem 1.4rem 3rem;color:var(--muted);
-    font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);
-  }
+  footer{text-align:center;padding:2.5rem 1.4rem 3rem;color:var(--muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06)}
   footer .sig{color:var(--gold-soft);font-family:"Suez One",serif;font-size:1.05rem}
 
-  /* load animation */
-  .reveal{opacity:0;transform:translateY(18px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
   @keyframes rise{to{opacity:1;transform:none}}
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none!important}
-    .reveal{opacity:1;transform:none}
-  }
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
   @media (max-width:520px){
-    body{font-size:1.1rem}
-    article.piece{padding:1.8rem 1.4rem}
-    .feedback{padding:2rem 1.3rem}
+    body{font-size:calc(1.1rem * var(--fs))}
+    article.piece{padding:1.9rem 1.4rem}.feedback{padding:2rem 1.3rem}
+    .controls{top:auto;bottom:1rem;left:50%;transform:translateX(-50%)}
   }
 </style>
 </head>
@@ -211,6 +138,12 @@
   <span style="top:22%;left:24%;animation-delay:-11s">ש</span>
 </div>
 
+<div class="controls" aria-label="גודל טקסט">
+  <span class="lbl">טקסט</span>
+  <button class="a-sm" id="fsDown" title="הקטן">א−</button>
+  <button class="a-lg" id="fsUp" title="הגדל">א+</button>
+</div>
+
 <header class="hero">
   <div class="eyebrow reveal" style="animation-delay:.05s">קריאה מוקדמת · גרסת בטא</div>
   <h1 class="booktitle reveal" style="animation-delay:.18s">העולם שבנפש</h1>
@@ -220,17 +153,28 @@
     מוזמנים לקרוא ולהשאיר משוב
     <span class="joy">תהנו!</span>
   </p>
-  <div class="scrollcue reveal" style="animation-delay:.7s">לקטעים</div>
+  <div class="scrollcue reveal" style="animation-delay:.7s">לתוכן</div>
 </header>
 
 <main class="wrap">
 
-  <div class="section-head">
-    <h2>הקטעים</h2>
+  <nav class="toc" id="toc">
+    <h2>תוכן</h2>
+  </nav>
+
+  <div class="section-head" id="scenes-head">
+    <h2>סצנות</h2>
+    <div class="sub">קטעים ספרותיים</div>
     <div class="rule"></div>
   </div>
+  <section id="scenes"></section>
 
-  <section class="pieces" id="pieces"><!-- נטען אוטומטית מתוך המערך שבסקריפט --></section>
+  <div class="section-head" id="pieces-head">
+    <h2>קטעים</h2>
+    <div class="sub">מסות, זיכרונות ותיאורים אישיים</div>
+    <div class="rule"></div>
+  </div>
+  <section id="pieces"></section>
 
   <div class="section-head">
     <h2>השאירו משוב</h2>
@@ -238,28 +182,39 @@
   </div>
 
   <section class="feedback">
-    <p class="intro">כל מילה עוזרת. ספרו לי מה עבד, מה צרם, מה נגע — והכל יישלח ישירות אליי בוואטסאפ.</p>
+    <p class="intro">כל מילה עוזרת. אפשר להגיב על קטע ספציפי (כפתור בסוף כל קטע) או כאן באופן כללי.</p>
+    <ul class="prompts">
+      <li>מה נשאר איתך אחרי הקריאה?</li>
+      <li>איפה התחברת, ואיפה איבדת עניין?</li>
+      <li>מה לא היה ברור?</li>
+    </ul>
 
-    <div class="field">
-      <label for="name">שם (לא חובה)</label>
-      <input type="text" id="name" placeholder="איך תרצו שאקרא לכם?" />
+    <div class="chan-tabs" id="chanTabs">
+      <button class="active" data-panel="wa">בוואטסאפ <span class="anon-note">אישי, מגיע ישר אליי</span></button>
+      <button data-panel="anon" id="anonTabBtn" style="display:none">אנונימי <span class="anon-note">בלי שם, חופשי לבקר</span></button>
     </div>
 
-    <div class="field">
-      <label for="piece">על איזה קטע? (לא חובה)</label>
-      <select id="piece">
-        <option value="">כללי / על כל הקטעים</option>
-      </select>
+    <div class="panel active" id="panel-wa">
+      <div class="field"><label for="name">שם (לא חובה)</label>
+        <input type="text" id="name" placeholder="איך תרצו שאקרא לכם?" /></div>
+      <div class="field"><label for="piece">על איזה קטע? (לא חובה)</label>
+        <select id="piece"><option value="">כללי / על כל הקטעים</option></select></div>
+      <div class="field"><label for="msg">המשוב שלכם</label>
+        <textarea id="msg" placeholder="מה נשאר לכם? איפה התחברתם או איבדתם עניין? מה לא היה ברור?"></textarea></div>
+      <button class="send-btn" id="send">שליחה בוואטסאפ</button>
+      <div class="warn" id="warn"></div>
+      <p class="note">הכפתור פותח את וואטסאפ עם ההודעה מוכנה — רק ללחוץ "שלח".</p>
     </div>
 
-    <div class="field">
-      <label for="msg">המשוב שלכם</label>
-      <textarea id="msg" placeholder="כתבו כאן..."></textarea>
+    <div class="panel" id="panel-anon">
+      <div class="field"><label for="aPiece">על איזה קטע? (לא חובה)</label>
+        <select id="aPiece"><option value="">כללי / על כל הקטעים</option></select></div>
+      <div class="field"><label for="aMsg">המשוב שלכם (אנונימי)</label>
+        <textarea id="aMsg" placeholder="כאן אפשר להיות חופשיים לגמרי וכנים. אף שם לא נשמר."></textarea></div>
+      <button class="send-btn" id="aSend">שליחה אנונימית</button>
+      <div class="warn" id="aWarn"></div>
+      <div class="ok-msg" id="aOk"></div>
     </div>
-
-    <button class="send-btn" id="send">שליחה בוואטסאפ</button>
-    <div class="warn" id="warn"></div>
-    <p class="note">הכפתור פותח את וואטסאפ עם ההודעה מוכנה — רק ללחוץ "שלח". המשוב אינו נשמר בדף.</p>
   </section>
 
 </main>
@@ -271,16 +226,21 @@
 
 <script>
 /* ===================================================================
-   ‼ הגדרות — ערכו את שתי הנקודות האלה בלבד ‼
+   ‼ הגדרות — ערכו רק את הנקודות שמסומנות ‼
    =================================================================== */
 
-/* 1) מספר הוואטסאפ שלכם, בפורמט בינלאומי, ללא + וללא 0 בהתחלה.
-      דוגמה לישראל: המספר 050-1234567 נכתב כ-972501234567          */
+/* מספר וואטסאפ, פורמט בינלאומי בלי + ובלי 0. למשל 050-1234567 -> 972501234567 */
 const WHATSAPP_NUMBER = "972584432432";
 
-/* 2) הקטעים. כל קטע הוא אובייקט עם title (כותרת) ו-body (הטקסט).
-      שורה ריקה כפולה בתוך body יוצרת פסקה חדשה.
-      העתיקו-הדביקו את הקטעים שכתבתם במקום הדוגמאות.                */
+/* כמה מהפריטים הם "סצנות" (הראשונים). השאר יוצגו כ"קטעים". */
+const SCENE_COUNT = 4;
+
+/* משוב אנונימי (לא חובה): פתחו טופס חינמי ב-formspree.io, העתיקו את מזהה
+   הטופס (למשל "xayzwkpb") והדביקו כאן. אם נשאר ריק - הלשונית האנונימית
+   פשוט לא תוצג. ראו README. */
+const FORMSPREE_ID = "";
+
+/* הקטעים — נטענים אוטומטית. אין צורך לגעת. */
 const pieces = [
   {
     title: `סצנת הירייה במטווח`,
@@ -820,52 +780,132 @@ const pieces = [
 
 /* =================== מכאן ומטה אין צורך לגעת =================== */
 
+const scenesEl = document.getElementById("scenes");
 const piecesEl = document.getElementById("pieces");
+const tocEl = document.getElementById("toc");
 const selectEl = document.getElementById("piece");
+const aSelectEl = document.getElementById("aPiece");
+
+function readingMinutes(text){
+  const w = String(text).trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(w/180));
+}
+function readKey(i){ return "osn_read_" + i; }
+
+const tocScenes = document.createElement("div");
+const tocPieces = document.createElement("div");
+function addGroupLabel(parent, label){
+  const d = document.createElement("div"); d.className="group-label"; d.textContent=label; parent.appendChild(d);
+}
+addGroupLabel(tocScenes, "סצנות");
+addGroupLabel(tocPieces, "קטעים");
 
 pieces.forEach((p, i) => {
+  const isScene = i < SCENE_COUNT;
+  const mins = readingMinutes(p.body);
+  const id = "piece-" + i;
+
   const art = document.createElement("article");
-  art.className = "piece reveal";
-  art.style.animationDelay = (0.05 * i) + "s";
+  art.className = "piece reveal"; art.id = id; art.style.animationDelay = (0.04*i)+"s";
 
-  const h = document.createElement("h3");
-  h.textContent = p.title;
-  art.appendChild(h);
+  const h = document.createElement("div"); h.className="ptitle"; h.textContent=p.title; art.appendChild(h);
+  const meta = document.createElement("div"); meta.className="pmeta"; meta.textContent = "≈ " + mins + " דק׳ קריאה"; art.appendChild(meta);
 
-  String(p.body).split(/\n\s*\n/).forEach(par => {
-    if (par.trim() === "") return;
-    const para = document.createElement("p");
-    para.textContent = par.trim();
-    art.appendChild(para);
+  String(p.body).split(/\n\s*\n/).forEach(par=>{
+    const t = par.trim(); if(!t) return;
+    const para = document.createElement("p"); para.textContent = t; art.appendChild(para);
   });
 
-  piecesEl.appendChild(art);
+  const actions = document.createElement("div"); actions.className="pactions";
+  const fb = document.createElement("button"); fb.className="btn-fb"; fb.textContent="השאר משוב על הקטע הזה";
+  fb.addEventListener("click", ()=>{
+    const text = 'משוב על "' + p.title + '"\n\nמה נשאר לך? איפה התחברת או איבדת עניין? מה לא היה ברור?\n\n';
+    window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text), "_blank");
+  });
+  const rd = document.createElement("button"); rd.className="btn-read";
+  function paintRead(state){
+    rd.textContent = state ? "✓ נקרא" : "סמן כנקרא";
+    rd.classList.toggle("is-read", state);
+    art.classList.toggle("read", state);
+    const chk = document.querySelector('[data-check="'+i+'"]');
+    if(chk) chk.textContent = state ? "✓" : "";
+  }
+  let isRead = false;
+  try{ isRead = localStorage.getItem(readKey(i)) === "1"; }catch(e){}
+  rd.addEventListener("click", ()=>{
+    isRead = !isRead;
+    try{ isRead ? localStorage.setItem(readKey(i),"1") : localStorage.removeItem(readKey(i)); }catch(e){}
+    paintRead(isRead);
+  });
+  actions.appendChild(fb); actions.appendChild(rd); art.appendChild(actions);
 
-  const opt = document.createElement("option");
-  opt.value = p.title;
-  opt.textContent = p.title;
-  selectEl.appendChild(opt);
+  (isScene ? scenesEl : piecesEl).appendChild(art);
+
+  // toc entry
+  const a = document.createElement("a"); a.href = "#"+id;
+  a.innerHTML = '<span class="t"><span class="check" data-check="'+i+'"></span><span class="ttl"></span></span><span class="time">≈ '+mins+' דק׳</span>';
+  a.querySelector(".ttl").textContent = p.title;
+  (isScene ? tocScenes : tocPieces).appendChild(a);
+
+  // dropdowns
+  [selectEl, aSelectEl].forEach(sel=>{
+    const o=document.createElement("option"); o.value=p.title; o.textContent=p.title; sel.appendChild(o);
+  });
+
+  setTimeout(()=>paintRead(isRead),0);
 });
 
-document.getElementById("send").addEventListener("click", () => {
-  const name = document.getElementById("name").value.trim();
-  const piece = selectEl.value;
-  const msg = document.getElementById("msg").value.trim();
-  const warn = document.getElementById("warn");
+tocEl.appendChild(tocScenes); tocEl.appendChild(tocPieces);
 
-  if (!msg) {
-    warn.textContent = "כתבו משוב לפני השליחה 🙂";
-    return;
-  }
-  warn.textContent = "";
+/* font size */
+let fs = 1;
+try{ const s=parseFloat(localStorage.getItem("osn_fontscale")); if(s) fs=s; }catch(e){}
+function applyFs(){ document.documentElement.style.setProperty("--fs", fs); try{localStorage.setItem("osn_fontscale", fs);}catch(e){} }
+applyFs();
+document.getElementById("fsUp").addEventListener("click", ()=>{ fs=Math.min(1.6, +(fs+0.1).toFixed(2)); applyFs(); });
+document.getElementById("fsDown").addEventListener("click", ()=>{ fs=Math.max(0.9, +(fs-0.1).toFixed(2)); applyFs(); });
 
-  let text = "משוב על הספר \"העולם שבנפש\"";
-  if (name)  text += "\nשם: " + name;
-  if (piece) text += "\nקטע: " + piece;
-  text += "\n\n" + msg;
+/* whatsapp general form */
+document.getElementById("send").addEventListener("click", ()=>{
+  const name=document.getElementById("name").value.trim();
+  const piece=selectEl.value;
+  const msg=document.getElementById("msg").value.trim();
+  const warn=document.getElementById("warn");
+  if(!msg){ warn.textContent="כתבו משוב לפני השליחה 🙂"; return; }
+  warn.textContent="";
+  let text='משוב על הספר "העולם שבנפש"';
+  if(name) text+="\nשם: "+name;
+  if(piece) text+="\nקטע: "+piece;
+  text+="\n\n"+msg;
+  window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),"_blank");
+});
 
-  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
-  window.open(url, "_blank");
+/* channel tabs + anonymous */
+if(FORMSPREE_ID){
+  document.getElementById("anonTabBtn").style.display="";
+}
+document.getElementById("chanTabs").addEventListener("click",(e)=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#chanTabs button").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  document.getElementById("panel-wa").classList.toggle("active", b.dataset.panel==="wa");
+  document.getElementById("panel-anon").classList.toggle("active", b.dataset.panel==="anon");
+});
+document.getElementById("aSend").addEventListener("click", async ()=>{
+  const piece=aSelectEl.value;
+  const msg=document.getElementById("aMsg").value.trim();
+  const warn=document.getElementById("aWarn"); const ok=document.getElementById("aOk");
+  warn.textContent=""; ok.textContent="";
+  if(!FORMSPREE_ID){ warn.textContent="המשוב האנונימי עוד לא הוגדר."; return; }
+  if(!msg){ warn.textContent="כתבו משוב לפני השליחה 🙂"; return; }
+  try{
+    const res=await fetch("https://formspree.io/f/"+FORMSPREE_ID,{
+      method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({ feedback:msg, piece:piece||"כללי", source:"דף קוראי בטא" })
+    });
+    if(res.ok){ ok.textContent="תודה! המשוב נשלח באנונימיות 🙏"; document.getElementById("aMsg").value=""; aSelectEl.value=""; }
+    else{ warn.textContent="משהו השתבש, נסו שוב."; }
+  }catch(err){ warn.textContent="אין חיבור כרגע, נסו שוב."; }
 });
 </script>
 </body>
